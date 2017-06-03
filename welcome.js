@@ -40,20 +40,27 @@ function getTimePeriod(hour) {
 }
 function getWelcomeMsg(name, hours) {
     if (name == '') {
-        return 'Hello, I don\'t think we\'ve met. What\'s your name?';
+        return 'Hello, I don\'t think we\'ve met.';
     } else {
         return 'Good ' + getTimePeriod(hours) + ' ' + name + '.' + ' How are you?';
     }
 }
 function makeNameField() {
+    var cont = document.createElement('div');
+    var p = document.createElement('h2');
     var d = document.createElement('div');
     var b = document.createElement('button');
+    cont.id = 'name-form';
     d.id = 'name-field';
     b.id = 'name-submit';
+    p.id = 'prompt';
     b.innerHTML = 'submit';
+    p.innerHTML = 'What\'s your name?';
     d.contentEditable = 'true';
-    $('form').appendChild(d);
-    $('form').appendChild(b);
+    $('page').appendChild(cont);
+    cont.appendChild(d);
+    cont.appendChild(b);
+    $('welcome-container').appendChild(p);
     b.addEventListener('click', function() {
         setCookie('name', $('name-field').innerHTML, 10000);
     });

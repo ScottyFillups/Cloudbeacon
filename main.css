@@ -2,31 +2,87 @@
 
 html, body {
     margin: 0;
+    height: 100%;
 }
 body {
     background-image: url('img.jpg');
     background-size: cover;
-}
-#welcome-container {
-    text-align: center;
-    background-color: rgba(0,0,0,.3);
+    background-repeat: no-repeat;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    padding: 2%;
+}
+@media (min-width: 280px) {
+    body {font-size: 50%;}
+    #welcome-container {padding: 5% 8%;}
+}
+@media (min-width: 350px) {
+    body {font-size: 55%;}
+}
+@media (min-width: 440px) {
+    body {font-size: 60%;}
+    #welcome-container {padding: 5% 18%;}
+}
+@media (min-width: 600px) {
+    #welcome-container {padding: 4% 5%;}
+    body {font-size: 65%}
+}
+@media (min-width: 730px) {
+    body {font-size: 70%;}
+}
+@media (min-width: 830px) {
+    body {font-size: 80%;}
+    #welcome-container {padding: 3% 5%;}
+}
+@media (min-width: 1100px) {
+    body {font-size: 90%;}
+    #welcome-container {padding: 2% 5%;}
+}
+@media (min-width: 1440px) {
+    body {font-size: 100%;}
+    #welcome-container {padding: 1% 5%;}
+}
+
+
+#welcome-container, #name-field {
+    text-align: center;
+    background-color: rgba(0,0,0,.4);
 }
 #welcome {
     font-size: 4em;
     font-weight: normal;
 }
-#today {
-    font-size: 2em;
-    font-weight: normal;
+#today, #prompt {
+    font-size: 2.2em;
+}
+#form {
+    height: auto;
+    /*display: none;*/
 }
 #name-field {
     color: white;
-    background-color: black;
-    font-size: 3em;
-    margin: 0 auto;
+    font-size: 4em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     width: 50%;
-    height: 300px;
+    height: 2em;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    line-height: 2em;
+}
+#name-submit {
+    background-color: black;
+    color: white;
+    border: 0;
+    margin: 2% 0;
+    padding: 1%;
+}
+#name-form {
+    width: 100%;
+    position: absolute;
+    bottom: 30%;
+    text-align: center;
+}
+#page {
+    height: 100%;
+    position: relative;
 }
