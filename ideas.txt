@@ -1,0 +1,20 @@
+Simple goal setting page, which prompts you for your name and sets a cookie. Users will be able to add fields, which they can enter info into. All their goals will be saved via cookies; no server-side stuff is involved (javascript will be used to handle cookies). Since there is no user submission, use "contenteditable=true" on a div as the input. Once the user clicks a "checkmark" button, or moves onto another field, a cookie will be saved.
+
+Create a simple javascript thing which can tell whether it's morning, afternoon, or night. Make the page "nag" a little. The general welcome format will be:
+
+Good [time] [name], [how are you?]
+Today is [date]
+What do you want to accomplish today?
+[]
+[]
+[]
+[]
+
+Cookie functions were taken from w3schools.com:
+https://www.w3schools.com/js/js_cookies.asp
+
+Make a button which sets the page to their homepage
+Make a donation button (use stripe)
+Make the background image change daily (you'll use a cookie to see if the day changed)
+
+
