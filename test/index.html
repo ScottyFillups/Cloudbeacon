@@ -15,6 +15,14 @@
                 <input type='submit'>
             </form>
             <h2 ng-if='isUser'>It's currently {{time | date:'HH:mm:ss'}}</h2>
+            <form ng-submit='todoAdd()' ng-show='isUser'>
+                <input type='text' ng-model='todoInput' size='100' placeholder='Add new task'>
+                <input type='submit' value='Add'>
+            </form>
+            <div ng-repeat='item in todoList' ng-if='isUser'>
+                <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
+            </div>
+            <button ng-click='remove()' ng-if='isUser'>Delete selected</button>
             <button ng-click='clear()'>clear</button>
         </div>
     </body>
