@@ -4,26 +4,32 @@ function getExpiry(years) {
     return new Date(new Date().setFullYear(new Date().getFullYear()+years));
 }
 
+//have a collection of strings?
+
+
+
+
+
 angular.module('root', ['ngCookies'])
     .controller('index', ['$scope', '$cookies', function($scope, $cookies) {
-        var expiry = getExpiry(5);
+        var expiry;
         $scope.name;
-        $scope.welcome;
-        $scope.isuser = true;
+        $scope.isUser;
+        $scope.timeperiod = 'day';
+        $scope.time;
         $scope.submit = function() {
+            expiry = getExpiry(5);
             $cookies.put('user', $scope.name, {expires: expiry});
-            $scope.welcome = 'ur name is ' + $cookies.get('user');
-            $scope.isuser = true;
+            $scope.isUser = true;
         };
         $scope.clear = function() {
-            $cookies.put('user', undefined);
-            $scope.isuser = false;
+            $cookies.remove('user');
+            $scope.isUser = false;
         };
-        if ($cookies.get('user') === undefined) {
-            $scope.welcome = 'ur new! put in a name';
-            $scope.isuser = false;
+        if ($cookies.get('user') !== undefined) {
+            $scope.isUser = true;
+            $scope.name = $cookies.get('user');
         } else {
-            $scope.welcome = 'ur name is ' + $cookies.get('user');
-            $scope.isuser = true;
+            $scope.isUser = false;
         }
-    }]);
+    }])

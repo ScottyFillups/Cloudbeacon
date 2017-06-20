@@ -8,11 +8,11 @@
     </head>
     <body>
         <div id='#welcome' ng-controller='index'>
-            <h1>{{welcome}}</h1>
-            <form ng-submit='submit()'>
+            <h1 ng-if='isUser'>Good {{timeperiod}} {{name}}. How are you?</h1>
+            <h1 ng-if='!isUser'>Hello. It seems we haven't met before, what is your name?</h1>
+            <form ng-submit='submit()' ng-show='!isUser' >
                 <input type='text' ng-model='name' />
                 <input type='submit' />
-                <input type='text' ng-if='isuser' />
             </form>
             <button ng-click='clear()'>clear</button>
         </div>
