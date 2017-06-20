@@ -3,6 +3,22 @@
 function getExpiry(years) {
     return new Date(new Date().setFullYear(new Date().getFullYear()+years));
 }
+function getTimePeriod(hour) {
+    if (hour >= 5 && hour < 12) {
+        return 'morning';
+    }
+    else if (hour >= 12 && hour < 18) {
+        return 'afternoon';
+    }
+    else if (hour >= 18 && hour < 22) {
+        return 'evening';
+    }
+    else {
+        return 'night';
+    }
+}
+
+
 
 //have a collection of strings?
 
@@ -15,7 +31,8 @@ angular.module('root', ['ngCookies'])
         var expiry;
         $scope.name;
         $scope.isUser;
-        $scope.timeperiod = 'day';
+        $scope.time = Date.now();
+        $scope.timeperiod = getTimePeriod(new Date($scope.time).getHours());
         function tick() {
             $scope.time = Date.now();
         }
