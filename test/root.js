@@ -11,12 +11,16 @@ function getExpiry(years) {
 
 
 angular.module('root', ['ngCookies'])
-    .controller('index', ['$scope', '$cookies', function($scope, $cookies) {
+    .controller('index', ['$scope', '$cookies', '$interval', function($scope, $cookies, $interval) {
         var expiry;
         $scope.name;
         $scope.isUser;
         $scope.timeperiod = 'day';
-        $scope.time;
+        function tick() {
+            $scope.time = Date.now();
+        }
+        tick();
+        $interval(tick, 1000);
         $scope.submit = function() {
             expiry = getExpiry(5);
             $cookies.put('user', $scope.name, {expires: expiry});
