@@ -1,5 +1,3 @@
-//put this in a service later? or look up how to do it "properly" in angular
-
 function getExpiry(years) {
     return new Date(new Date().setFullYear(new Date().getFullYear()+years));
 }
@@ -17,18 +15,9 @@ function getTimePeriod(hour) {
         return 'night';
     }
 }
-
-
-
-//have a collection of strings?
-
-
-
-
-
 angular.module('root', ['ngCookies'])
     .controller('index', ['$scope', '$cookies', '$interval', function($scope, $cookies, $interval) {
-        var expiry;
+        var expiry = getExpiry(5)
         $scope.name;
         $scope.isUser;
         $scope.time = Date.now();
@@ -39,7 +28,6 @@ angular.module('root', ['ngCookies'])
         tick();
         $interval(tick, 1000);
         $scope.submit = function() {
-            expiry = getExpiry(5);
             $cookies.put('user', $scope.name, {expires: expiry});
             $scope.isUser = true;
         };
@@ -69,7 +57,7 @@ angular.module('root', ['ngCookies'])
             $scope.todoList.push(obj);
             $scope.todoInput = '';
             console.log(i);
-            $cookies.putObject('todo' + i, obj);
+            $cookies.putObject('todo' + i, obj, {expires: expiry});
             i++;
         };
         $scope.remove = function() {
