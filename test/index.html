@@ -14,7 +14,7 @@
                 <input type='text' ng-model='name'>
                 <input type='submit'>
             </form>
-            <h2 ng-if='isUser'>It's currently {{time | date:'HH:mm:ss'}}</h2>
+            <h2 ng-if='isUser'>Today is {{time | date:fullDate}}. It's currently {{time | date:'HH:mm:ss'}}</h2>
             <form ng-submit='todoAdd()' ng-show='isUser'>
                 <input type='text' ng-model='todoInput' size='100' placeholder='Add new task'>
                 <input type='submit' value='Add'>

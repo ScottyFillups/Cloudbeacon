@@ -53,7 +53,7 @@ angular.module('root', ['ngCookies'])
         } else {
             $scope.isUser = false;
         }
-
+        //https://stackoverflow.com/questions/30662405/angularjs-storing-an-object-in-a-cookie-giving-result-of-object-object
         $scope.todoList = [];
         $scope.todoAdd = function() {
             $scope.todoList.push({todoText: $scope.todoInput, done: false});
