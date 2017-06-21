@@ -53,18 +53,29 @@ angular.module('root', ['ngCookies'])
         } else {
             $scope.isUser = false;
         }
-        //https://stackoverflow.com/questions/30662405/angularjs-storing-an-object-in-a-cookie-giving-result-of-object-object
         $scope.todoList = [];
+        var i = 0;
+        var temp;
+        while ((temp = $cookies.getObject('todo' + i)) !== undefined) {
+            $scope.todoList.push(temp);
+            i++;
+        }
         $scope.todoAdd = function() {
-            $scope.todoList.push({todoText: $scope.todoInput, done: false});
+            var obj = {todoText: $scope.todoInput, done: false};
+            $scope.todoList.push(obj);
             $scope.todoInput = '';
+            console.log(i);
+            $cookies.putObject('todo' + i, obj);
+            i++;
         };
         $scope.remove = function() {
             var oldList = $scope.todoList;
             $scope.todoList = [];
-            angular.forEach(oldList, function(item) {
+            angular.forEach(oldList, function(item, index) {
                 if (!item.done) {
                     $scope.todoList.push(item);
+                } else {
+                    $cookies.remove('todo' + index);
                 }
             });
         };
