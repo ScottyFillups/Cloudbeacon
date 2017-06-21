@@ -8,22 +8,33 @@
     </head>
     <body>
         <div id='#welcome' ng-controller='index'>
-            <h1 ng-if='isUser'>Good {{timeperiod}} {{name}}. How are you?</h1>
-            <h1 ng-if='!isUser'>Hello. It seems we haven't met before, what is your name?</h1>
-            <form ng-submit='submit()' ng-show='!isUser'>
-                <input type='text' ng-model='name'>
-                <input type='submit'>
-            </form>
-            <h2 ng-if='isUser'>Today is {{time | date:fullDate}}. It's currently {{time | date:'HH:mm:ss'}}</h2>
-            <form ng-submit='todoAdd()' ng-show='isUser'>
-                <input type='text' ng-model='todoInput' size='100' placeholder='Add new task'>
-                <input type='submit' value='Add'>
-            </form>
-            <div ng-repeat='item in todoList' ng-if='isUser'>
-                <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
+            <div ng-show='!isUser'>
+                <h1>
+                    Hello. It seems we haven't met before, what is your name?
+                </h1>
+                <form ng-submit='submit()'>
+                    <input type='text' ng-model='name'>
+                    <input type='submit'>
+                </form>
+
             </div>
-            <button ng-click='remove()' ng-if='isUser'>Delete selected</button>
-            <button ng-click='clear()'>clear</button>
+            <div ng-show='isUser'>
+                <h1>
+                    Good {{timeperiod}} {{name}}. How are you?
+                </h1>
+                <h2>
+                    Today is {{time | date:fullDate}}. It's currently {{time | date:'HH:mm:ss'}}
+                </h2>
+                <form ng-submit='todoAdd()'>
+                    <input type='text' ng-model='todoInput' size='100' placeholder='Add new task'>
+                    <input type='submit' value='Add'>
+                </form>
+                <div ng-repeat='item in todoList'>
+                    <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
+                </div>
+                <button ng-click='remove()'>Delete selected</button>
+                <button ng-click='clear()'>clear</button>
+            </div>
         </div>
     </body>
 </html>

@@ -46,6 +46,10 @@ angular.module('root', ['ngCookies'])
         $scope.clear = function() {
             $cookies.remove('user');
             $scope.isUser = false;
+            angular.forEach($scope.todoList, function(item, index) {
+                $cookies.remove('todo' + index);
+            });
+            $scope.todoList = [];
         };
         if ($cookies.get('user') !== undefined) {
             $scope.isUser = true;
