@@ -23,13 +23,13 @@
                     Good {{timeperiod}} {{name}}. How are you?
                 </h1>
                 <h2>
-                    Today is {{time | date:fullDate}}. It's currently {{time | date:'HH:mm:ss'}}
+                    Today is {{time | date:fullDate}}. It's currently {{time | date:'h:mm a'}}
                 </h2>
-                <form ng-submit='todoAdd()'>
-                    <input id='enter-task' type='text' ng-model='todoInput' size='80' placeholder='Add new task'>
-                    <input id='submit-task' type='submit' value='&#10095;'>
-                </form>
                 <div id='todo-list-container'>
+                    <form ng-submit='todoAdd()'>
+                        <input id='enter-task' type='text' ng-model='todoInput' placeholder='Add new task'>
+                        <input id='submit-task' type='submit' value='&#10095;'>
+                    </form>
                     <div ng-repeat='item in todoList'>
                         <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
                     </div>
