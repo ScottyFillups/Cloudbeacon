@@ -92,9 +92,9 @@ button {
     display: block;
 }
 
-
 input[type=checkbox] {
     -webkit-appearance: none;
+    color: #fff;
     -moz-appearance: none;
     appearance: none;
     background-color: transparent;
@@ -113,6 +113,14 @@ input[type=checkbox]:checked:after {
     top: -10px;
     left: 0px;
 }
+input:focus, button:focus {
+    outline: none;
+}
+input[type=text]::-webkit-input-placeholder {
+    color: #eaeaea;
+    color: rgba(255,255,255,0.5);
+}
+
 
 
 @media (min-width: 0px) {
