@@ -20,7 +20,7 @@
             </div>
             <div ng-show='isUser'>
                 <h1>
-                    Good {{timeperiod}} {{name}}. How are you?
+                    {{timestring}} {{name}}. How are you?
                 </h1>
                 <h2>
                     Today is {{time | date:fullDate}}. It's currently {{time | date:'h:mm a'}}
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <button ng-click='remove()'>Delete selected</button>
-                <button ng-click='clear()'>clear</button>
+                <button ng-click='clear()'>clear all data</button>
             </div>
         </div>
     </body>

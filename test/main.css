@@ -45,7 +45,7 @@ body {
 #todo-list-container {
     text-align: left;
     width: 70%;
-    margin: 2% auto;
+    margin: 2% auto 5% auto;
 }
 form {
     display: flex;
@@ -73,6 +73,22 @@ form {
     background-color: transparent;
     cursor: pointer;
 }
+button {
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    font-size: 1em;
+    margin: 2% auto;
+    padding: 0 10px;
+    font-family: 'Open sans', sans-serif;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: block;
+}
+
+
 input[type=checkbox] {
     -webkit-appearance: none;
     -moz-appearance: none;

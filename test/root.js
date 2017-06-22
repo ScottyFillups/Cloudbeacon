@@ -3,16 +3,16 @@ function getExpiry(years) {
 }
 function getTimePeriod(hour) {
     if (hour >= 5 && hour < 12) {
-        return 'morning';
+        return 'Good morning';
     }
     else if (hour >= 12 && hour < 18) {
-        return 'afternoon';
+        return 'Good afternoon';
     }
     else if (hour >= 18 && hour < 22) {
-        return 'evening';
+        return 'Good evening';
     }
     else {
-        return 'night';
+        return "It's getting late,";
     }
 }
 angular.module('root', ['ngCookies'])
@@ -21,7 +21,7 @@ angular.module('root', ['ngCookies'])
         $scope.name;
         $scope.isUser;
         $scope.time = Date.now();
-        $scope.timeperiod = getTimePeriod(new Date($scope.time).getHours());
+        $scope.timestring = getTimePeriod(new Date($scope.time).getHours());
         function tick() {
             $scope.time = Date.now();
         }
