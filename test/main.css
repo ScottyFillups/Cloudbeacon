@@ -42,7 +42,7 @@ body {
     font-weight: 300;
     padding-top: 2%;
 }
-#todo-list-container {
+.todo-list-container {
     text-align: left;
     width: 70%;
     margin: 2% auto 5% auto;
@@ -51,7 +51,7 @@ form {
     display: flex;
     margin-bottom: 10px;
 }
-#enter-task {
+.enter-task {
     flex: 1;
     background-color: transparent;
     border: 0;
@@ -60,7 +60,7 @@ form {
     font-family: 'Open sans', sans-serif;
     border-bottom: 1px solid #fff;
 }
-#submit-task {
+.submit-task {
     flex: 0;
     background-image: none;
     border-radius: 4px;
