@@ -8,7 +8,7 @@
         <link rel='stylesheet' href='main.css'>
     </head>
     <body>
-        <div id='#welcome' ng-controller='index'>
+        <div id='app' ng-controller='index'>
             <div ng-show='!isUser'>
                 <h1>
                     Hello. It seems we haven't met before, what is your name?
@@ -26,11 +26,13 @@
                     Today is {{time | date:fullDate}}. It's currently {{time | date:'HH:mm:ss'}}
                 </h2>
                 <form ng-submit='todoAdd()'>
-                    <input type='text' ng-model='todoInput' size='100' placeholder='Add new task'>
-                    <input type='submit' value='Add'>
+                    <input id='enter-task' type='text' ng-model='todoInput' size='80' placeholder='Add new task'>
+                    <input id='submit-task' type='submit' value='&#10095;'>
                 </form>
-                <div ng-repeat='item in todoList'>
-                    <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
+                <div id='todo-list-container'>
+                    <div ng-repeat='item in todoList'>
+                        <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
+                    </div>
                 </div>
                 <button ng-click='remove()'>Delete selected</button>
                 <button ng-click='clear()'>clear</button>
