@@ -109,3 +109,25 @@ input[type=checkbox]:checked:after {
     top: -10px;
     left: 0px;
 }
+
+
+@media (min-width: 0px) {
+    body {font-size: 60%;}
+    .todo-list-container {width: 100%}
+}
+@media (min-width: 330px) {
+    body {font-size: 70%;}
+    .todo-list-container {width: 100%}
+}
+@media (min-width: 800px) {
+    body {font-size: 80%;}
+    .todo-list-container {width: 100%}
+}
+@media (min-width: 1000px) {
+    body {font-size: 90%;}
+    .todo-list-container {width: 90%}
+}
+@media (min-width: 1200px) {
+    body {font-size: 100%;}
+    .todo-list-container {width: 70%}
+}
