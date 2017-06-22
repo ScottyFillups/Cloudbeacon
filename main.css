@@ -51,11 +51,12 @@ body {
     width: 70%;
     margin: 2% auto 5% auto;
 }
+
 form {
+    margin: 20px auto;
     display: flex;
-    margin-bottom: 10px;
 }
-.enter-task {
+.name-input, .task-input {
     flex: 1;
     background-color: transparent;
     border: 0;
@@ -64,7 +65,14 @@ form {
     font-family: 'Open sans', sans-serif;
     border-bottom: 1px solid #fff;
 }
-.submit-task {
+#name-form {
+    width: 50%;
+    margin-top: 50px;
+}
+.name-input {
+    font-size: 2em;
+}
+.submit-button {
     flex: 0;
     background-image: none;
     border-radius: 4px;
