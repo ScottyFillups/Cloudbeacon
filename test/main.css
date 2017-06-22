@@ -2,6 +2,9 @@
 h1, h2, h3 {
     font-weight: 300;
 }
+html, body{
+    margin: 0;
+}
 html {
     background: linear-gradient(270deg, #24c600, #61aaff);
     background-size: 400% 400%;
@@ -41,6 +44,7 @@ body {
     color: #fff;
     font-weight: 300;
     padding-top: 2%;
+    margin-bottom: 50px;
 }
 .todo-list-container {
     text-align: left;
@@ -130,4 +134,13 @@ input[type=checkbox]:checked:after {
 @media (min-width: 1200px) {
     body {font-size: 100%;}
     .todo-list-container {width: 70%}
+}
+
+footer {
+    position: fixed;
+    left: 4px;
+    bottom: 4px;
+    text-transform: uppercase;
+    font-size: 1em;
+    background-color: rgba(0,0,0,0.3);
 }

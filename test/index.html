@@ -8,7 +8,7 @@
         <link rel='stylesheet' href='main.css'>
     </head>
     <body>
-        <div id='app' ng-controller='index'>
+        <main id='app' ng-controller='index'>
             <div ng-show='!isUser'>
                 <h1>
                     Hello. It seems we haven't met before, what is your name?
@@ -39,7 +39,10 @@
                 <button ng-click='remove()'>Delete selected</button>
                 <button ng-click='clear()'>clear all data</button>
             </div>
-        </div>
+        </main>
+        <footer>
+            Built with AngularJS, by Philip Scott
+        </footer>
     </body>
 </html>
 
