@@ -85,8 +85,10 @@ app.controller("index", ["$scope", "$cookies", "$interval", "timer", "expiryDate
         }
         
         $scope.todoAdd = function() {
-            $scope.todoList = todoList.add($scope.todoList, $scope.todoInput);
-            $scope.todoInput = "";
+            if ($scope.todoInput) {
+                $scope.todoList = todoList.add($scope.todoList, $scope.todoInput);
+                $scope.todoInput = "";
+            }
         };
         $scope.remove = function() {
             $scope.todoList = todoList.remove($scope.todoList);
