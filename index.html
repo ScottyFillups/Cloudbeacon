@@ -28,7 +28,7 @@
                     <input class='task-input' type='text' ng-model='todoInput' placeholder='Add new task'>
                     <input class='submit-button' type='submit' value='&#10095;'>
                 </form>
-                <div ng-repeat='item in todoList'>
+                <div ng-repeat='item in todoList track by $index'>
                     <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
                 </div>
             </div>
