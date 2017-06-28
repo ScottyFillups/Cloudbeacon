@@ -17,8 +17,12 @@
             </form>
         </div>
         <div ng-show='isUser'>
-            <h1>{{timestring}} {{name}}. How are you?</h1>
-            <h2>Today is {{time | date:fullDate}}. It's currently {{time | date:'h:mm a'}}</h2>
+            <h1>
+                <span ng-bind="timestring"> </span><span ng-bind="name"></span>. How are you?</h1>
+            <h2>
+                Today is <span ng-bind="time | date:fullDate"></span>.
+                It's currently <span ng-bind="time | date:'h:mm:ss a'"></span>
+            </h2>
             <div class='todo-list-container'>
                 <form ng-submit='todoAdd()' autocomplete='off'>
                     <input class='task-input' type='text' ng-model='todoInput' placeholder='Add new task'>
@@ -28,7 +32,7 @@
                     <input type='checkbox' ng-model='item.done'><span ng-bind='item.todoText'></span>
                 </div>
             </div>
-            <button ng-click='remove()'>Delete selected</button>
+            <button ng-click='remove()'>delete selected</button>
             <button ng-click='clear()'>clear all data</button>
         </div>
         </main>
