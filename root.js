@@ -1,6 +1,21 @@
-function Timer(ngInterval) {
+function Timer() {
     this.tick = function() {
         return Date.now();
+    };
+    this.getTimePeriod = function() {
+        hour = new Date().getHours();
+        if (hour >= 5 && hour < 12) {
+            return "Good morning";
+        }
+        else if (hour >= 12 && hour < 18) {
+            return "Good afternoon";
+        }
+        else if (hour >= 18 && hour < 22) {
+            return "Good evening";
+        }
+        else {
+            return "It's getting late, ";
+        }      
     };
 }
 
@@ -8,35 +23,23 @@ function Timer(ngInterval) {
 function getExpiry(years) {
     return new Date(new Date().setFullYear(new Date().getFullYear()+years));
 }
-function getTimePeriod(hour) {
-    if (hour >= 5 && hour < 12) {
-        return "Good morning";
-    }
-    else if (hour >= 12 && hour < 18) {
-        return "Good afternoon";
-    }
-    else if (hour >= 18 && hour < 22) {
-        return "Good evening";
-    }
-    else {
-        return "It's getting late, ";
-    }
-}
 
-var app = angular.module("root", ["ngCookies", "services"]);
+var app = angular.module("root", ["ngCookies", "clock", "userHandler"]);
 
-app.controller("index", ["$scope", "$cookies", "$interval", "timer", function($scope, $cookies, $interval, timer) {
-        var expiry = getExpiry(5)
+app.controller("index", ["$scope", "$cookies", "$interval", "timer", "expiryDate", 
+        function($scope, $cookies, $interval, timer, expiryDate) {
+            
         $scope.name;
         $scope.isUser;
+       
         $scope.time = timer.tick();
+        $scope.timestring = timer.getTimePeriod();
         $interval(function() {
             $scope.time = timer.tick();
         }, 1000);
-        $scope.timestring = getTimePeriod(new Date($scope.time).getHours());
         
         $scope.submit = function() {
-            $cookies.put("user", $scope.name, {expires: expiry});
+            $cookies.put("user", $scope.name, {expires: expiryDate});
             $scope.isUser = true;
         };
         $scope.clear = function() {
@@ -65,7 +68,7 @@ app.controller("index", ["$scope", "$cookies", "$interval", "timer", function($s
             $scope.todoList.push(obj);
             $scope.todoInput = "";
             console.log(i);
-            $cookies.putObject("todo" + i, obj, {expires: expiry});
+            $cookies.putObject("todo" + i, obj, {expires: expiryDate});
             i++;
         };
         $scope.remove = function() {
@@ -81,5 +84,11 @@ app.controller("index", ["$scope", "$cookies", "$interval", "timer", function($s
         };
     }]);
 
-angular.module("services", [])
-    .service("timer", ["$interval", Timer]);
+angular.module("clock", [])
+    .service("timer", Timer)
+    .value("yearsTillExpiry", 5)
+    .factory("expiryDate", ["yearsTillExpiry", function(yearsTillExpiry) {
+        return new Date(new Date().setFullYear(new Date().getFullYear() + yearsTillExpiry));
+    }]);
+angular.module("userHandler", [])
+    
