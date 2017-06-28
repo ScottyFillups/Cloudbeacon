@@ -18,50 +18,39 @@ function Timer() {
         }      
     };
 }
-function TodoList(ngCookies) {
-    //bug: you'll need to set a second cookie keeping track of max #
-    //list can't be stored as a isntance variable because done property updates on user input
-    this.index = 0;
-    this.load = function() {
-        var tempTask;
-        var list = [];
-        while ((tempTask = ngCookies.getObject("cloudbeacon-task" + this.index)) !== undefined) {
-            list.push(tempTask);
-            this.index++;
+function TodoList(ngCookies, cookieKey) {
+    this.expiry;
+    this.load = function(expiry) {
+        this.expiry = expiry;
+        var tasks = [];
+        var tasksJSON = ngCookies.get(cookieKey);
+        if (tasksJSON) {
+            tasks = JSON.parse(tasksJSON);
         }
-        return list;
+        return tasks;
     };
-    this.add = function(list, task, expiry) {
-        var obj = {todoText: task, done: false};
-        list.push(obj);
-        ngCookies.putObject("cloudbeacon-task" + this.index, obj, {expires: expiry});
-        this.index++;
-        return list;
+    this.add = function(tasks, desc) {
+        var newTask = { desc: desc, done: false };
+        tasks.push(newTask);
+        ngCookies.put(cookieKey, JSON.stringify(tasks), {expires: this.expiry});
+        return tasks;
     };
-    this.remove = function(list) {
-        for (var i = 0; i < this.index; i++) {
-            if (list[i].done) {
-                ngCookies.remove("cloudbeacon-task" + i);
-                list.splice(i, 1);
-                this.index--;
+    this.remove = function(tasks) {
+        for (var i = 0; i < tasks.length; i++) {
+            if (tasks[i].done) {
+                tasks.splice(i, 1);
                 i--;
             }
         }
-        return list;
+        ngCookies.put(cookieKey, JSON.stringify(tasks), {expires: this.expiry});
+        return tasks;
     };
     this.clear = function() {
-        for (var i = 0; i < this.index; i++) {
-            ngCookies.remove("cloudbeacon-task" + i);
-        }
-        this.index = 0;
+        ngCookies.remove(cookieKey);
         return [];
     };
 }
 
-
-function getExpiry(years) {
-    return new Date(new Date().setFullYear(new Date().getFullYear()+years));
-}
 
 var app = angular.module("root", ["ngCookies", "clock", "todo"]);
 
@@ -70,7 +59,7 @@ app.controller("index", ["$scope", "$cookies", "$interval", "timer", "expiryDate
         $scope.name;
         $scope.isUser;
 
-        $scope.todoList = todoList.load();
+        $scope.todoList = todoList.load(expiryDate);
         $scope.time = timer.tick();
         $scope.timestring = timer.getTimePeriod();
         $interval(function() {
@@ -96,7 +85,7 @@ app.controller("index", ["$scope", "$cookies", "$interval", "timer", "expiryDate
         }
         
         $scope.todoAdd = function() {
-            $scope.todoList = todoList.add($scope.todoList, $scope.todoInput, expiryDate);
+            $scope.todoList = todoList.add($scope.todoList, $scope.todoInput);
             $scope.todoInput = "";
         };
         $scope.remove = function() {
@@ -111,4 +100,5 @@ angular.module("clock", [])
         return new Date(new Date().setFullYear(new Date().getFullYear() + yearsTillExpiry));
     }]);
 angular.module("todo", ["ngCookies"])
-    .service("todoList", ["$cookies", TodoList]); 
+    .value("cookieKey", "cloudbeacon-tasks")
+    .service("todoList", ["$cookies", "cookieKey", TodoList]); 
