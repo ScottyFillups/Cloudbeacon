@@ -50,47 +50,55 @@ function TodoList(ngCookies, cookieKey) {
         return [];
     };
 }
+function User(ngCookies, cookieKey) {
+    this.expiry;
+    this.load = function(expiry) {
+        this.expiry = expiry;
+        return ngCookies.get(cookieKey);
+    };
+    this.add = function(name) {
+        var valid = (name !== "" && name !== undefined);
+        if (valid) {
+            ngCookies.put(cookieKey, name, this.expiry);
+        }
+        return valid;
+    };
+    this.clear = function() {
+        ngCookies.remove(cookieKey);
+        return false;
+    };
+}
 
 
-var app = angular.module("root", ["ngCookies", "clock", "todo"]);
+var app = angular.module("root", ["ngCookies", "clock", "todo", "user"]);
 
-app.controller("index", ["$scope", "$cookies", "$interval", "timer", "expiryDate", "todoList",
-        function($scope, $cookies, $interval, timer, expiryDate, todoList) {
-        $scope.name;
-        $scope.isUser;
-
+app.controller("index", ["$scope", "$cookies", "$interval", "timer", "expiryDate", "todoList", "userHandler",
+        function($scope, $cookies, $interval, timer, expiryDate, todoList, userHandler) {
+        $scope.name = userHandler.load(expiryDate);
         $scope.todoList = todoList.load(expiryDate);
         $scope.time = timer.tick();
         $scope.timestring = timer.getTimePeriod();
         $interval(function() {
-            console.log($scope.todoList);
+            //console.log($scope.todoList);
             $scope.time = timer.tick();
         }, 1000);
+        $scope.isUser = ($scope.name !== "" && $scope.name !== undefined);
         
-        $scope.submit = function() {
-            $cookies.put("user", $scope.name, {expires: expiryDate});
-            $scope.isUser = true;
+        $scope.submitName = function() {
+            $scope.isUser = userHandler.add($scope.name);
         };
         $scope.clear = function() {
-            $cookies.remove("user");
             $scope.name = "";
-            $scope.isUser = false;
+            $scope.isUser = userHandler.clear();
             $scope.todoList = todoList.clear();
         };
-        if ($cookies.get("user") !== undefined) {
-            $scope.isUser = true;
-            $scope.name = $cookies.get("user");
-        } else {
-            $scope.isUser = false;
-        }
-        
         $scope.todoAdd = function() {
             if ($scope.todoInput) {
                 $scope.todoList = todoList.add($scope.todoList, $scope.todoInput);
                 $scope.todoInput = "";
             }
         };
-        $scope.remove = function() {
+        $scope.todoRemove = function() {
             $scope.todoList = todoList.remove($scope.todoList);
         };
     }]);
@@ -102,5 +110,8 @@ angular.module("clock", [])
         return new Date(new Date().setFullYear(new Date().getFullYear() + yearsTillExpiry));
     }]);
 angular.module("todo", ["ngCookies"])
-    .value("cookieKey", "cloudbeacon-tasks")
-    .service("todoList", ["$cookies", "cookieKey", TodoList]); 
+    .value("tasksCookieKey", "cloudbeacon-tasks")
+    .service("todoList", ["$cookies", "tasksCookieKey", TodoList]); 
+angular.module("user", ["ngCookies"])
+    .value("userCookieKey", "cloudbeacon-user")
+    .service("userHandler", ["$cookies", "userCookieKey", User]);

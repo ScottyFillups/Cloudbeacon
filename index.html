@@ -2,6 +2,7 @@
 <html ng-app='root'>
     <head>
         <title>Cloudbeacon</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src='vendor/angular.js'></script>
         <script src='vendor/angular-cookies.js'></script>
         <script src='root.js'></script>
@@ -11,7 +12,7 @@
         <main id='app' ng-controller='index'>
         <div ng-show='!isUser'>
             <h1>Hello. It seems we haven't met before, what is your name?</h1>
-            <form id='name-form' ng-submit='submit()' autocomplete='off'>
+            <form id='name-form' ng-submit='submitName()' autocomplete='off'>
                 <input class='name-input' type='text' ng-model='name' placeholder='Enter name'>
                 <input class='submit-button' type='submit' value='&#10095;'>
             </form>
@@ -32,7 +33,7 @@
                     <input type='checkbox' ng-model='task.done'><span ng-bind='task.desc'></span>
                 </div>
             </div>
-            <button ng-click='remove()'>delete selected</button>
+            <button ng-click='todoRemove()'>delete selected</button>
             <button ng-click='clear()'>clear all data</button>
         </div>
         </main>
