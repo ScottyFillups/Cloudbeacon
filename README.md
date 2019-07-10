@@ -1,2 +1,2 @@
 # Cloudbeacon
-Live here: <http://cloudbeacon.xyz>
+Live here: <https://scottyfillups.io/cloudbeacon/>
